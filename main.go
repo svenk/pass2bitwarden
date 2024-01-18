@@ -26,6 +26,7 @@ type bitwardenItem struct {
 	Type     int            `json:"type"`
 	RePrompt int            `json:"reprompt"`
 	Name     string         `json:"name"`
+	Notes    string         `json:"notes"`
 	Favorite bool           `json:"favorite"`
 	Login    bitwardenLogin `json:"login"`
 }
@@ -62,6 +63,7 @@ func main() {
 			Type:     1,
 			RePrompt: 0,
 			Name:     r[0],
+			Notes:    r[3],
 			Login: bitwardenLogin{
 				URIs:     []bitwardenLoginURI{bitwardenLoginURI{URI: r[0]}},
 				UserName: r[1],
@@ -92,7 +94,7 @@ func readCsv(filePath string) ([][]string, error) {
 	defer file.Close()
 
 	reader := csv.NewReader(file)
-	reader.FieldsPerRecord = 3
+//	reader.FieldsPerRecord = 3
 	reader.Comment = '#'
 
 	result, err := reader.ReadAll()

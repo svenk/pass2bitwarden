@@ -38,7 +38,7 @@ type bitwardenLogin struct {
 }
 
 type bitwardenLoginURI struct {
-	Match string `json:"match"`
+	Match *string `json:"match"` // hack to introduce a null instead of empty string
 	URI   string `json:"uri"`
 }
 
@@ -65,7 +65,7 @@ func main() {
 			Name:     r[0],
 			Notes:    r[3],
 			Login: bitwardenLogin{
-				URIs:     []bitwardenLoginURI{bitwardenLoginURI{URI: r[0]}},
+				URIs:     []bitwardenLoginURI{bitwardenLoginURI{URI: r[0], Match: nil}},
 				UserName: r[1],
 				Password: r[2],
 			},
